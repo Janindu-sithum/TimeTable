@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 10C Timetable HD</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .no-print {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        button {
+            padding: 12px 25px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .btn-dl { background-color: #2e7d32; }
+        .btn-reset { background-color: #c62828; }
+        button:hover { opacity: 0.8; }
+
+        /* Timetable UI */
+        #capture-area {
+            background-color: white;
+            padding: 20px;
+            width: 1050px;
+            box-sizing: border-box;
+        }
+
+        .tt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 5px;
+        }
+
+        .school-name { font-size: 13px; width: 320px; text-align: left; }
+        .class-title { font-size: 38px; font-weight: bold; text-align: center; flex-grow: 1; }
+        .teacher-name { font-size: 13px; width: 320px; text-align: right; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #000;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            text-align: center;
+            vertical-align: middle;
+            padding: 0;
+            color: #000;
+        }
+
+        /* Column Specifics */
+        .day-col { width: 60px; font-size: 32px; font-weight: 500; height: 110px; }
+        .interval-col { width: 35px; background-color: #fff; }
+        
+        thead th { height: 55px; font-weight: normal; }
+        .p-num { font-size: 24px; font-weight: bold; display: block; }
+        .p-time { font-size: 11px; display: block; margin-top: 2px; }
+
+        /* Cell Content */
+        .cell { padding: 5px; position: relative; height: 110px; box-sizing: border-box; }
+        .subject { font-size: 26px; font-weight: normal; display: block; margin-top: 5px; }
+        .staff-code { font-size: 12px; position: absolute; bottom: 8px; right: 10px; }
+
+        /* Interval Vertical Text */
+        .interval-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+        }
+
+        .tt-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px;
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        [contenteditable]:focus {
+            background-color: #f9f9f9;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print">
+        <button class="btn-reset" onclick="resetTable()">සියල්ල මකන්න</button>
+        <button class="btn-dl" onclick="saveAsImage()">HD පින්තූරය Download කරන්න</button>
+    </div>
+
+    <div id="capture-area">
+        <div class="tt-header">
+            <div class="school-name" contenteditable="true">Andiyagala Navodya Vidyalaya</div>
+            <div class="class-title" contenteditable="true">GRADE 10C</div>
+            <div class="teacher-name" contenteditable="true">Class teacher: Ms HBAD Herath</div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th><span class="p-num" contenteditable="true">1</span><span class="p-time" contenteditable="true">07:50 - 08:30</span></th>
+                    <th><span class="p-num" contenteditable="true">2</span><span class="p-time" contenteditable="true">08:30 - 09:10</span></th>
+                    <th><span class="p-num" contenteditable="true">3</span><span class="p-time" contenteditable="true">09:10 - 09:50</span></th>
+                    <th><span class="p-num" contenteditable="true">4</span><span class="p-time" contenteditable="true">09:50 - 10:30</span></th>
+                    <th class="interval-col"><span style="font-size: 20px;" contenteditable="true"> Interval </span></th>
+                    <th><span class="p-num" contenteditable="true">5</span><span class="p-time" contenteditable="true">10:50 - 11:30</span></th>
+                    <th><span class="p-num" contenteditable="true">6</span><span class="p-time" contenteditable="true">11:30 - 12:10</span></th>
+                    <th><span class="p-num" contenteditable="true">7</span><span class="p-time" contenteditable="true">12:10 - 12:50</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="day-col" contenteditable="true">Mo</td>
+                    <td class="cell" contenteditable="true"><span class="subject">Eng</span><span class="staff-code">HBNS</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">II - OL</span><span class="staff-code">RMSS / BK</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Scie</span><span class="staff-code">HMA</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Math</span><span class="staff-code">DMRC</span></td>
+                    <td class="interval-col" rowspan="5">
+                        <div class="interval-text" contenteditable="true"></div>
+                    </td>
+                    <td class="cell" contenteditable="true"><span class="subject">III - OL</span><span class="staff-code">TBA</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Math</span><span class="staff-code">DMRC</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">His</span><span class="staff-code">MKS</span></td>
+                </tr>
+                <tr>
+                    <td class="day-col" contenteditable="true">Tu</td>
+                    <td class="cell" contenteditable="true"><span class="subject">I - OL</span><span class="staff-code">JDTK</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Sin</span><span class="staff-code">HAS</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">His</span><span class="staff-code">MKS</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Math</span><span class="staff-code">DMRC</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Scie</span><span class="staff-code">HMA</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Math</span><span class="staff-code">DMRC</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Eng</span><span class="staff-code">HBNS</span></td>
+                </tr>
+                <tr>
+                    <td class="day-col" contenteditable="true">We</td>
+                    <td class="cell" contenteditable="true"><span class="subject">Eng</span><span class="staff-code">HBNS</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Bud</span><span class="staff-code">HBAD</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Sin</span><span class="staff-code">HAS</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Math</span><span class="staff-code">DMRC</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">His</span><span class="staff-code">MKS</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Scie</span><span class="staff-code">HMA</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">I - OL</span><span class="staff-code">JDTK</span></td>
+                </tr>
+                <tr>
+                    <td class="day-col" contenteditable="true">Th</td>
+                    <td class="cell" contenteditable="true"><span class="subject">His</span><span class="staff-code">MKS</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Scie</span><span class="staff-code">HMA</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Bud</span><span class="staff-code">HBAD</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">II - OL</span><span class="staff-code">RMSS</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Sin</span><span class="staff-code">HAS</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Math</span><span class="staff-code">DMRC</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Eng</span><span class="staff-code">HBNS</span></td>
+                </tr>
+                <tr>
+                    <td class="day-col" contenteditable="true">Fr</td>
+                    <td class="cell" contenteditable="true"><span class="subject">Math</span><span class="staff-code">DMRC</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Lib</span><span class="staff-code">HMRP</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">III - OL</span><span class="staff-code">TBA</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Scie</span><span class="staff-code">HMA</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Scie</span><span class="staff-code">HMA</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Sin</span><span class="staff-code">HAS</span></td>
+                    <td class="cell" contenteditable="true"><span class="subject">Soc</span><span class="staff-code">MKS</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tt-footer">
+            <span contenteditable="true">Timetable generated: 1/6/2026</span>
+            <span>aSc Timetables</span>
+        </div>
+    </div>
+
+    <script>
+        // Auto-save logic
+        const editables = document.querySelectorAll('[contenteditable]');
+        editables.forEach((el, i) => {
+            const id = 'tt-final-' + i;
+            el.setAttribute('id', id);
+            const saved = localStorage.getItem(id);
+            if (saved) el.innerHTML = saved;
+            el.addEventListener('input', () => localStorage.setItem(id, el.innerHTML));
+        });
+
+        function resetTable() {
+            if (confirm("සියල්ල මකා මුල් තත්වයට පත් කරන්නද?")) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        function saveAsImage() {
+            const area = document.getElementById('capture-area');
+            html2canvas(area, {
+                scale: 4, 
+                useCORS: true,
+                backgroundColor: "#ffffff"
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'School_Timetable_Grade10C.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>
