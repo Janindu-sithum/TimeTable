@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downloading Video...</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding-top: 100px; background-color: #f0f2f5; color: #333; }
+        .container { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: inline-block; max-width: 90%; }
+        .btn { display: inline-block; margin-top: 20px; padding: 12px 25px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #007bff; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 15px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>ඔබේ වීඩියෝව දැන් බාගත (Download) වේවි</h2>
+        <div class="loader"></div>
+        <p>ස්වයංක්‍රීයව බාගත නොවුනේ නම් පහත බොත්තම ක්ලික් කරන්න.</p>
+        
+        <a class="btn" href="https://drive.google.com/uc?export=download&id=1OeEknSjXIaaG84v_xKUpBIJEqpW4aZaz">Download Now</a>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // තත්පර 2 කට පසු ඩවුන්ලෝඩ් එක පටන් ගනී
+            setTimeout(function() {
+                window.location.href = "https://drive.google.com/uc?export=download&id=1OeEknSjXIaaG84v_xKUpBIJEqpW4aZaz";
+            }, 2000);
+        };
+    </script>
+
+</body>
+</html>
